@@ -7,27 +7,32 @@ namespace Sorteo
     {
         static void Main(string[] args)
         {   
-            List<string> participantes = new List<string>();  
+            //ahora tenemos lista de personas (es un tipo nuevo)!
+            List<Persona> listaParticipantes = new List<Persona>();              
             Console.WriteLine("Bienvenido al sorteo!!");
-            Console.WriteLine("Ingrese a un participante");
+            Console.Write("Ingrese a un participante: ");
             string participante = Console.ReadLine();
             while(!participante.ToLower().Equals("salir"))
             {
-                participantes.Add(participante);
-                Console.WriteLine("Ingrese a otro participante");
+                //creamos una instancia de la clase persona
+                //(creamos una persona)
+                Persona nuevaPersona = new Persona();
+                nuevaPersona.Nombre = participante;
+                listaParticipantes.Add(nuevaPersona);
+                Console.Write("Ingrese a otro participante: ");
                 participante = Console.ReadLine();
             }
 
             Console.WriteLine("Los participantes del sorteo son:");
-            foreach(string itemParticipante in participantes)
+            foreach(Persona persona in listaParticipantes)
             {
                 //ver string.Format en MSDN
-                Console.WriteLine(string.Format("-{0}", itemParticipante));
+                Console.WriteLine(string.Format("-{0}", persona.Nombre));
             }
 
-            Console.WriteLine("El ganador del sorteo es...");
-            int numeroGanador = (new Random()).Next(0, participantes.Count);
-            Console.WriteLine(participantes[numeroGanador]);
+            Console.WriteLine("La persona ganadora del sorteo es...");
+            int numeroGanador = (new Random()).Next(0, listaParticipantes.Count);
+            Console.WriteLine(listaParticipantes[numeroGanador].Nombre);
             Console.ReadKey();
         }
     }
